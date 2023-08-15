@@ -42,14 +42,18 @@ public class MemberResource {
         return Strings.ERROR_MEMBER_NOT_FOUND;
     }
 
-    public List<Member> findByName(String name) {
+    public String findByName(String name) {
         List<Member> membersByName = new ArrayList<>();
         for (Member entity : members) {
             if (entity.getName().toUpperCase().contains(name.toUpperCase())) {
                 membersByName.add(entity);
             }
         }
-        return membersByName;
+        if (!membersByName.isEmpty()) {
+            return Strings.MEMBERS_FINDED + membersByName.size() + "\n" + membersByName.toString();
+        }
+
+        return Strings.ERROR_MEMBER_NOT_FOUND;
     }
 
     public Member findByCardNumber(String cardNumber) {

@@ -55,6 +55,6 @@ public class Member {
 
     @Override
     public String toString() {
-        return cardNumber + "," + name + "," + date + "," + document;
+        return "\n" + cardNumber + "," + name + "," + date + "," + document;
     }
 }

@@ -89,22 +89,16 @@ public class MemberPage {
         System.out.print(Strings.WRITE_MEMBER_NAME);
         scanner.nextLine();
         name = scanner.nextLine();
-        List<Member> membersFinded = memberResource.findByName(name);
 
         ClearScreen.clear();
-        if (!membersFinded.isEmpty()) {
-            System.out.println(Strings.MEMBERS_FINDED + membersFinded.size());
-            membersFinded.forEach(System.out::println);
-        } else {
-            System.out.println(Strings.ERROR_MEMBER_NOT_FOUND);
-        }
+        System.out.println(memberResource.findByName(name));
     }
 
     private void updateMember(Scanner scanner) {
         System.out.print(Strings.WRITE_CARD_NUMBER);
         cardNumber = scanner.next().toUpperCase();
         if (memberResource.findByCardNumber(cardNumber) != null) {
-            System.out.println(Strings.DATA_TO_NEW_MEMBER);
+            System.out.println(Strings.NEW_MEMBER_INFO);
             scanner.nextLine();
             name = getNameFromScanner(scanner);
             document = getDocumentFromScanner(scanner);

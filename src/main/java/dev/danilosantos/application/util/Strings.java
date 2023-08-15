@@ -11,7 +11,7 @@ public class Strings {
     public static final String WRITE_MEMBER_NAME = "Digite o nome do Sócio: ";
     public static final String WRITE_CARD_NUMBER = "Digite o numero da carteirinha: ";
 
-    public static final String DATA_TO_NEW_MEMBER = "\n-DADOS DO NOVO USUÁRIO-\n";
+    public static final String NEW_MEMBER_INFO = "\n-DADOS DO NOVO USUÁRIO-\n";
 
     public static final String WRITE_DOCUMENT_TYPE = "Digite o tipo de documento(RG/CPF): ";
 
