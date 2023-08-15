@@ -32,14 +32,14 @@ public class MemberResource {
         }
     }
 
-    public Member findByDocument(Document document) {
+    public String findByDocument(Document document) {
         for (Member entity : members) {
             if (entity.getDocument().getType().equals(document.getType())
                     && entity.getDocument().getValue().equals(document.getValue())) {
-                return entity;
+                return entity.toString();
             }
         }
-        return null;
+        return Strings.ERROR_MEMBER_NOT_FOUND;
     }
 
     public List<Member> findByName(String name) {

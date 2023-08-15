@@ -82,11 +82,7 @@ public class MemberPage {
     private void findByDocument(Scanner scanner) {
         document = getDocumentFromScanner(scanner);
         ClearScreen.clear();
-        if (memberResource.findByDocument(document) != null) {
-            System.out.println(memberResource.findByDocument(document));
-        } else {
-            System.out.println(Strings.ERROR_MEMBER_NOT_FOUND);
-        }
+        System.out.println(memberResource.findByDocument(document));
     }
 
     private void findByName(Scanner scanner) {
