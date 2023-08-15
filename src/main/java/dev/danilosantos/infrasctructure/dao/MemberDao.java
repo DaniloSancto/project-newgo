@@ -7,6 +7,7 @@ import dev.danilosantos.infrasctructure.file_management.Routes;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 public class MemberDao {
     Gson gson = new Gson();
@@ -20,12 +21,15 @@ public class MemberDao {
         }
     }
 
+    public void updateDocument(List<Member> members) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Routes.MEMBER_FILE_PATH))) {
 
-    public void update() {
-
-    }
-
-    public void delete() {
-
+            for (Member entity : members) {
+                writer.write(gson.toJson(entity));
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error writing file: " + e.getMessage());
+        }
     }
 }

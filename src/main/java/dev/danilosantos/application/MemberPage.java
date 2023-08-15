@@ -103,14 +103,10 @@ public class MemberPage {
             name = getNameFromScanner(scanner);
             document = getDocumentFromScanner(scanner);
 
-            Member updatedMember = new Member(cardNumber, name, new Date(), document);
             ClearScreen.clear();
-            if (memberResource.updateMemberByCardNumber(cardNumber, updatedMember)) {
-                System.out.println(Strings.updatedMember(updatedMember.getName()));
-            } else {
-                System.out.println(Strings.ERROR_TO_UPDATE_MEMBER);
-            }
+            System.out.println(memberResource.updateMemberByCardNumber(cardNumber, name, document));
         } else {
+            ClearScreen.clear();
             System.out.println(Strings.ERROR_MEMBER_NOT_FOUND);
         }
     }

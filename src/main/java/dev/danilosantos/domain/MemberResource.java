@@ -7,6 +7,7 @@ import dev.danilosantos.infrasctructure.Document;
 import dev.danilosantos.infrasctructure.Member;
 import dev.danilosantos.infrasctructure.dao.MemberDao;
 import dev.danilosantos.infrasctructure.file_management.Routes;
+import dev.danilosantos.infrasctructure.util.DateFormat;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -65,30 +66,16 @@ public class MemberResource {
         return null;
     }
 
-    public boolean updateMemberByCardNumber(String cardNumber, Member member) {
-        int count = 0;
-        boolean hasMember = false;
-        for (Member entity : members) {
-            if (entity.getCardNumber().equals(cardNumber)) {
-                members.set(count, member);
-                hasMember = true;
-            }
-            count++;
-        }
-        if (hasMember == false) {
-            return hasMember;
+    public String updateMemberByCardNumber(String cardNumber, String name, Document document) {
+        Member entity = findByCardNumber(cardNumber);
+
+        if (entity.getCardNumber().equals(cardNumber)) {
+            members.set(members.indexOf(entity), new Member(entity.getCardNumber(),name, new Date(), document));
+            memberDao.updateDocument(members);
+            return Strings.updatedMember(name);
         }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Routes.MEMBER_FILE_PATH))) {
-
-            for (Member entity : members) {
-                writer.write(gson.toJson(entity));
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            System.out.println("Error writing file: " + e.getMessage());
-        }
-        return true;
+        return Strings.ERROR_TO_UPDATE_MEMBER;
     }
 
     public boolean deleteMemberByCardNumber(String cardNumber) {
