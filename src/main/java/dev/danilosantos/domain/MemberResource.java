@@ -70,39 +70,22 @@ public class MemberResource {
         Member entity = findByCardNumber(cardNumber);
 
         if (entity.getCardNumber().equals(cardNumber)) {
-            members.set(members.indexOf(entity), new Member(entity.getCardNumber(),name, new Date(), document));
+            members.set(members.indexOf(entity), new Member(entity.getCardNumber(), name, new Date(), document));
             memberDao.updateDocument(members);
             return Strings.updatedMember(name);
         }
-
         return Strings.ERROR_TO_UPDATE_MEMBER;
     }
 
-    public boolean deleteMemberByCardNumber(String cardNumber) {
-        Member entity = new Member();
-        boolean hasMember = false;
-        for (Member member : members) {
-            if (member.getCardNumber().equals(cardNumber)) {
-                entity = member;
-                hasMember = true;
-            }
-        }
-        if (hasMember == true) {
+    public String deleteMemberByCardNumber(String cardNumber) {
+        Member entity = findByCardNumber(cardNumber);
+
+        if (entity != null) {
             members.remove(entity);
-        } else {
-            return hasMember;
+            memberDao.updateDocument(members);
+            return Strings.MEMBER_SUCCESSFULLY_DELETED;
         }
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Routes.MEMBER_FILE_PATH))) {
-
-            for (Member member : members) {
-                writer.write(gson.toJson(member));
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            System.out.println("Error writing file: " + e.getMessage());
-        }
-        return hasMember;
+        return Strings.ERROR_MEMBER_NOT_FOUND;
     }
 
     public List<Member> getAllMembersFromDocument() {

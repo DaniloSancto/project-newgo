@@ -115,11 +115,7 @@ public class MemberPage {
         System.out.print(Strings.WRITE_CARD_NUMBER);
         cardNumber = scanner.next().toUpperCase();
         ClearScreen.clear();
-        if (memberResource.deleteMemberByCardNumber(cardNumber)) {
-            System.out.println(Strings.MEMBER_SUCCESSFULLY_DELETED);
-        } else {
-            System.out.println(Strings.ERROR_MEMBER_NOT_FOUND);
-        }
+        System.out.println(memberResource.deleteMemberByCardNumber(cardNumber));
     }
 
     private void findAll() {
