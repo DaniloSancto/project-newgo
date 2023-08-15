@@ -66,6 +66,13 @@ public class MemberResource {
         return null;
     }
 
+    public String findAllMembers() {
+        if (!members.isEmpty()) {
+            return Strings.MEMBERS_FINDED + members.size() + "\n" + members.toString();
+        }
+        return Strings.ERROR_MEMBER_NOT_FOUND;
+    }
+
     public String updateMemberByCardNumber(String cardNumber, String name, Document document) {
         Member entity = findByCardNumber(cardNumber);
 

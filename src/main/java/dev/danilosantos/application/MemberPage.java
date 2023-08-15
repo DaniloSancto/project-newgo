@@ -119,12 +119,8 @@ public class MemberPage {
     }
 
     private void findAll() {
-        if (memberResource.getMembers().size() != 0) {
-            System.out.println(Strings.MEMBERS_FINDED + memberResource.getMembers().size());
-            memberResource.getMembers().forEach(System.out::println);
-        } else {
-            System.out.println(Strings.ERROR_MEMBER_NOT_FOUND);
-        }
+        ClearScreen.clear();
+        System.out.println(memberResource.findAllMembers());
     }
 
     private String getNameFromScanner(Scanner scanner) {
