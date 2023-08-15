@@ -1,7 +1,7 @@
 package dev.danilosantos.application;
 
 import dev.danilosantos.application.util.ClearScreen;
-import dev.danilosantos.application.util.GenerateMemberCardNumber;
+import dev.danilosantos.domain.util.GenerateMemberCardNumber;
 import dev.danilosantos.application.util.Strings;
 import dev.danilosantos.domain.MemberResource;
 import dev.danilosantos.infrasctructure.Document;
@@ -76,14 +76,7 @@ public class MemberPage {
         name = getNameFromScanner(scanner);
         document = verificationToInsertMemberOnDocument(getDocumentFromScanner(scanner), scanner);
         ClearScreen.clear();
-        if (document != null && name != null && name != "") {
-            member = new Member(generateCardNumber.generate(), name, new Date(), document);
-            memberResource.insertMember(member);
-
-            System.out.println(Strings.MEMBER_SUCCESSFULLY_INSERTED);
-        } else {
-            System.out.println(Strings.ERROR_TO_INSERT_MEMBER);
-        }
+        System.out.println(memberResource.insertMember(name, document));
     }
 
     private void findByDocument(Scanner scanner) {

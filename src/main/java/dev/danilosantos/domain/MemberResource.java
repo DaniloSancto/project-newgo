@@ -1,30 +1,35 @@
 package dev.danilosantos.domain;
 
 import com.google.gson.Gson;
+import dev.danilosantos.application.util.Strings;
+import dev.danilosantos.domain.util.GenerateMemberCardNumber;
 import dev.danilosantos.infrasctructure.Document;
 import dev.danilosantos.infrasctructure.Member;
+import dev.danilosantos.infrasctructure.dao.MemberDao;
 import dev.danilosantos.infrasctructure.file_management.Routes;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MemberResource {
-
-    private List<Member> members = new ArrayList<>();
+    MemberDao memberDao = new MemberDao();
+    GenerateMemberCardNumber generateCardNumber = new GenerateMemberCardNumber();
     Gson gson = new Gson();
 
-    public boolean insertMember(Member member) {
-        members.add(member);
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Routes.MEMBER_FILE_PATH, true))) {
+    private final List<Member> members = new ArrayList<>();
 
-            writer.write(gson.toJson(member));
-            writer.newLine();
-            return true;
-        } catch (IOException e) {
-            System.out.println("Error writing file: " + e.getMessage());
+    // método verifica se os dados passados pelo usuário estão corretos e faz a inserção no documento
+    public String insertMember(String name, Document document) {
+        if (document != null && name != null && !name.isEmpty()) {
+            Member member = new Member(generateCardNumber.generate(), name, new Date(), document);
+            memberDao.insert(member);
+            members.add(member);
+            return Strings.MEMBER_SUCCESSFULLY_INSERTED;
+        } else {
+            return Strings.ERROR_TO_INSERT_MEMBER;
         }
-        return false;
     }
 
     public Member findByDocument(Document document) {
@@ -38,13 +43,13 @@ public class MemberResource {
     }
 
     public List<Member> findByName(String name) {
-        List<Member> membersFindedByName = new ArrayList<>();
+        List<Member> membersByName = new ArrayList<>();
         for (Member entity : members) {
             if (entity.getName().toUpperCase().contains(name.toUpperCase())) {
-                membersFindedByName.add(entity);
+                membersByName.add(entity);
             }
         }
-        return membersFindedByName;
+        return membersByName;
     }
 
     public Member findByCardNumber(String cardNumber) {

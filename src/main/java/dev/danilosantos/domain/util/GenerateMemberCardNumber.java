@@ -1,4 +1,4 @@
-package dev.danilosantos.application.util;
+package dev.danilosantos.domain.util;
 
 import java.util.Random;
 
