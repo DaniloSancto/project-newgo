@@ -10,6 +10,7 @@ public class Strings {
 
     public static final String WRITE_MEMBER_NAME = "Digite o nome do Sócio: ";
     public static final String WRITE_CARD_NUMBER = "Digite o numero da carteirinha: ";
+    public static final String WRITE_DOCUMENT_VALUE = "Digite o numero do documento (somente números):";
 
     public static final String NEW_MEMBER_INFO = "\n-DADOS DO NOVO USUÁRIO-\n";
 
@@ -31,10 +32,6 @@ public class Strings {
 
     public static String updatedMember(String name) {
         return "Sócio:" + name + " atualizado com sucesso!";
-    }
-
-    public static String writeDocumentValue(String documentType) {
-        return "Digite o numero do " + documentType + "(somente números): ";
     }
 
 }

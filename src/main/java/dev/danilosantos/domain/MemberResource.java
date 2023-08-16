@@ -21,7 +21,7 @@ public class MemberResource {
 
     private final List<Member> members = new ArrayList<>();
 
-    // método verifica se os dados passados pelo usuário estão corretos e faz a inserção no documento
+    // Verifica se os dados passados pelo usuário estão corretos e faz a inserção no documento
     public String insertMember(String name, Document document) {
         if (document != null && name != null && !name.isEmpty()) {
             Member member = new Member(generateCardNumber.generate(), name, new Date(), document);
@@ -33,6 +33,7 @@ public class MemberResource {
         }
     }
 
+    // Procura na lista de sócios se existe algum com o documento e retorna se existe ou não
     public String findByDocument(Document document) {
         for (Member entity : members) {
             if (entity.getDocument().getType().equals(document.getType())
@@ -43,6 +44,7 @@ public class MemberResource {
         return Strings.ERROR_MEMBER_NOT_FOUND;
     }
 
+    // Procura na lista de sócios se existe algum com o nome e retorna se existe ou não
     public String findByName(String name) {
         List<Member> membersByName = new ArrayList<>();
         for (Member entity : members) {
@@ -57,6 +59,7 @@ public class MemberResource {
         return Strings.ERROR_MEMBER_NOT_FOUND;
     }
 
+    // procura na lista de membro um membro com a carteirinha se não existe retorna nulo
     public Member findByCardNumber(String cardNumber) {
         for (Member entity : members) {
             if (entity.getCardNumber().equalsIgnoreCase(cardNumber)) {
@@ -66,6 +69,7 @@ public class MemberResource {
         return null;
     }
 
+    //procura retorna todos os membros da lista, caso não exista nenhum retorna um erro
     public String findAllMembers() {
         if (!members.isEmpty()) {
             return Strings.MEMBERS_FINDED + members.size() + "\n" + members.toString();
@@ -73,6 +77,7 @@ public class MemberResource {
         return Strings.ERROR_MEMBER_NOT_FOUND;
     }
 
+    //recebe valores e atualiza um membro na lista
     public String updateMemberByCardNumber(String cardNumber, String name, Document document) {
         Member entity = findByCardNumber(cardNumber);
 
@@ -84,6 +89,7 @@ public class MemberResource {
         return Strings.ERROR_TO_UPDATE_MEMBER;
     }
 
+    //procura um membro caso encotre deleta ele da lista, caso nçao encotre retorna um erro
     public String deleteMemberByCardNumber(String cardNumber) {
         Member entity = findByCardNumber(cardNumber);
 

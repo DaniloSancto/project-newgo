@@ -129,30 +129,32 @@ public class MemberPage {
     }
 
     private Document getDocumentFromScanner(Scanner scanner) {
-        DocumentType documentType = null;
-        String documentValue = null;
-        boolean isSpelledRight = false;
-        while (!isSpelledRight) {
+        DocumentType documentType = getDocumentType(scanner);
+        String documentValue = getDocumentValue(scanner);
+        return new Document(documentType, documentValue);
+    }
+
+    private DocumentType getDocumentType(Scanner scanner) {
+        while (true) {
             System.out.print(Strings.WRITE_DOCUMENT_TYPE);
             String typeFromScanner = scanner.next().toUpperCase();
             if (typeFromScanner.equals("RG") || typeFromScanner.equals("CPF")) {
-                documentType = DocumentType.valueOf(typeFromScanner);
-                isSpelledRight = true;
+                return DocumentType.valueOf(typeFromScanner);
             } else {
                 System.out.println(Strings.ERROR_INVALID_VALUE);
             }
         }
-        isSpelledRight = false;
-        while (!isSpelledRight) {
-            System.out.print(Strings.writeDocumentValue(documentType.toString()));
-            documentValue = scanner.next();
-            if (documentValue.matches("[+-]?\\d*(\\.\\d+)?")) {
-                isSpelledRight = true;
-            } else {
-                System.out.println(Strings.ERROR_INVALID_VALUE);
-            }
-        }
+    }
 
-        return new Document(documentType, documentValue);
+    private String getDocumentValue(Scanner scanner) {
+        while (true) {
+            System.out.print(Strings.WRITE_DOCUMENT_VALUE);
+            String documentValue = scanner.next();
+            if (documentValue.matches("[+-]?\\d*(\\.\\d+)?")) {
+                return documentValue;
+            } else {
+                System.out.println(Strings.ERROR_INVALID_VALUE);
+            }
+        }
     }
 }
