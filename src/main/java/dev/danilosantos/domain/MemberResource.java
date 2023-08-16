@@ -18,7 +18,7 @@ public class MemberResource {
     private final List<Member> members = new ArrayList<>();
 
     public MemberResource() {
-        if (!createFoldersAndFiles.create()) {
+        if (!createFoldersAndFiles.createFolderAndMemberFile()) {
             members.addAll(getAllMembersFromDocument());
         }
     }
@@ -55,7 +55,7 @@ public class MemberResource {
             }
         }
         if (!membersByName.isEmpty()) {
-            return Strings.MEMBERS_FINDED + membersByName.size() + "\n" + membersByName.toString();
+            return Strings.MEMBERS_FINDED + membersByName.size() + "\n" + membersByName;
         }
 
         return Strings.ERROR_MEMBER_NOT_FOUND;
@@ -74,7 +74,7 @@ public class MemberResource {
     //procura retorna todos os membros da lista, caso não exista nenhum retorna um erro
     public String findAllMembers() {
         if (!members.isEmpty()) {
-            return Strings.MEMBERS_FINDED + members.size() + "\n" + members.toString();
+            return Strings.MEMBERS_FINDED + members.size() + "\n" + members;
         }
         return Strings.ERROR_MEMBER_NOT_FOUND;
     }
@@ -83,7 +83,7 @@ public class MemberResource {
     public String updateMemberByCardNumber(String cardNumber, String name, Document document) {
         Member entity = findByCardNumber(cardNumber);
 
-        if (entity.getCardNumber().equals(cardNumber)) {
+        if (entity != null && entity.getCardNumber().equals(cardNumber)) {
             members.set(members.indexOf(entity), new Member(entity.getCardNumber(), name, new Date(), document));
             memberDao.updateDocument(members);
             return Strings.updatedMember(name);
@@ -116,9 +116,5 @@ public class MemberResource {
             }
         }
         return false;
-    }
-
-    public List<Member> getMembers() {
-        return members;
     }
 }

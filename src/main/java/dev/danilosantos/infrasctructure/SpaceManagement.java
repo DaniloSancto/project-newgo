@@ -63,20 +63,4 @@ public class SpaceManagement {
     public void setExit(Date exit) {
         this.exit = exit;
     }
-
-    private void insertStandardSpaces() {
-        spaces.add(new Space(SpaceCategory.ESPORTES, "quadra de futebol indoor"));
-        spaces.add(new Space(SpaceCategory.ESPORTES, "quadra de vôlei de praia"));
-        spaces.add(new Space(SpaceCategory.ESPORTES, "quadra de beach tennis"));
-        spaces.add(new Space(SpaceCategory.ESPORTES, "campo de golfe 1"));
-        spaces.add(new Space(SpaceCategory.ESPORTES, "campo de golfe 2"));
-        spaces.add(new Space(SpaceCategory.ESPORTES, "piscina olímpica 1"));
-        spaces.add(new Space(SpaceCategory.ESPORTES, "piscina olímpica 2"));
-        spaces.add(new Space(SpaceCategory.RELAXAMENTO, "lago com pedalinhos"));
-        spaces.add(new Space(SpaceCategory.RECREACAO, "jardim botânico"));
-        spaces.add(new Space(SpaceCategory.ESPORTES, "academia"));
-        spaces.add(new Space(SpaceCategory.RELAXAMENTO, "spá"));
-        spaces.add(new Space(SpaceCategory.RECREACAO, "área para churrasco"));
-        spaces.add(new Space(SpaceCategory.RECREACAO, "parque infantil"));
-    }
 }
