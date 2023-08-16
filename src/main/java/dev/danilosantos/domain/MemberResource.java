@@ -1,15 +1,12 @@
 package dev.danilosantos.domain;
 
-import com.google.gson.Gson;
 import dev.danilosantos.application.util.Strings;
 import dev.danilosantos.domain.util.GenerateMemberCardNumber;
 import dev.danilosantos.infrasctructure.Document;
 import dev.danilosantos.infrasctructure.Member;
 import dev.danilosantos.infrasctructure.dao.MemberDao;
-import dev.danilosantos.infrasctructure.file_management.Routes;
-import dev.danilosantos.infrasctructure.util.DateFormat;
+import dev.danilosantos.infrasctructure.file_management.CreateFoldersAndFiles;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,9 +14,14 @@ import java.util.List;
 public class MemberResource {
     MemberDao memberDao = new MemberDao();
     GenerateMemberCardNumber generateCardNumber = new GenerateMemberCardNumber();
-    Gson gson = new Gson();
-
+    CreateFoldersAndFiles createFoldersAndFiles = new CreateFoldersAndFiles();
     private final List<Member> members = new ArrayList<>();
+
+    public MemberResource() {
+        if (!createFoldersAndFiles.create()) {
+            members.addAll(getAllMembersFromDocument());
+        }
+    }
 
     // Verifica se os dados passados pelo usuário estão corretos e faz a inserção no documento
     public String insertMember(String name, Document document) {
@@ -101,27 +103,12 @@ public class MemberResource {
         return Strings.ERROR_MEMBER_NOT_FOUND;
     }
 
+    // retorna uma lista de membros existente no documento
     public List<Member> getAllMembersFromDocument() {
-        List<Member> list = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(Routes.MEMBER_FILE_PATH))) {
-            String line = reader.readLine();
-
-            while (line != null) {
-                Member member = gson.fromJson(line, Member.class);
-
-                list.add(member);
-                line = reader.readLine();
-            }
-
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return list;
+        return memberDao.readAllMembersFromDocument();
     }
 
-    public boolean verifyIfDocumentAlredyExists(Document document) {
+    public boolean verifyIfDocumentExists(Document document) {
         for (Member entity : members) {
             if (entity.getDocument().getType().equals(document.getType())
                     && entity.getDocument().getValue().equals(document.getValue())) {

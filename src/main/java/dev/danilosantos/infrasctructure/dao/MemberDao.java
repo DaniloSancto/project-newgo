@@ -4,9 +4,8 @@ import com.google.gson.Gson;
 import dev.danilosantos.infrasctructure.Member;
 import dev.danilosantos.infrasctructure.file_management.Routes;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MemberDao {
@@ -19,6 +18,23 @@ public class MemberDao {
         } catch (IOException e) {
             System.out.println("Error writing file: " + e.getMessage());
         }
+    }
+
+    public List<Member> readAllMembersFromDocument() {
+        List<Member> list = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(Routes.MEMBER_FILE_PATH))) {
+            String line = reader.readLine();
+
+            while (line != null) {
+                Member member = gson.fromJson(line, Member.class);
+
+                list.add(member);
+                line = reader.readLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
+        return list;
     }
 
     public void updateDocument(List<Member> members) {

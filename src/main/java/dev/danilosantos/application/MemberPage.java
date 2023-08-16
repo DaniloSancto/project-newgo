@@ -5,21 +5,13 @@ import dev.danilosantos.application.util.Strings;
 import dev.danilosantos.domain.MemberResource;
 import dev.danilosantos.infrasctructure.Document;
 import dev.danilosantos.infrasctructure.enums.DocumentType;
-import dev.danilosantos.infrasctructure.file_management.CreateFoldersAndFiles;
 
 import java.util.Scanner;
 
 public class MemberPage {
     MemberResource memberResource = new MemberResource();
-    CreateFoldersAndFiles createFoldersAndFiles = new CreateFoldersAndFiles();
     String name, cardNumber;
     Document document;
-
-    public MemberPage() {
-        if (!createFoldersAndFiles.create()) {
-            memberResource.getMembers().addAll(memberResource.getAllMembersFromDocument());
-        }
-    }
 
     public void registerOfMembers(Scanner scanner) {
         boolean running = true;
@@ -111,7 +103,7 @@ public class MemberPage {
     }
 
     private Document verificationToInsertMemberOnDocument(Document document, Scanner scanner) {
-        if (!memberResource.verifyIfDocumentAlredyExists(document)) {
+        if (!memberResource.verifyIfDocumentExists(document)) {
             return document;
         } else {
             System.out.println(Strings.ERROR_DOCUMENT_ALREDY_EXISTS);
