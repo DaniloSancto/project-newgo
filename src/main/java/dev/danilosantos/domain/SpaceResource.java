@@ -16,6 +16,10 @@ public class SpaceResource {
         return false;
     }
 
+    public void updateDocument(List<Space> list) {
+        spaceDao.updateDocument(list);
+    }
+
     public List<Space> getAllSpacesFromDocument() {
         List<Space> list = spaceDao.readAllSpacesFromDocument();
         if(!list.isEmpty()) {

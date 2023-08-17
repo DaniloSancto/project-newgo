@@ -14,11 +14,17 @@ public class SpaceManagementResource {
     CreateFoldersAndFiles createFoldersAndFiles = new CreateFoldersAndFiles();
 
     public SpaceManagementResource() {
-        if (!createFoldersAndFiles.createSpaceManagementFile()) {
-            spaceManagement.getSpaces().addAll(getAllSpacesFromDocument());
-        } else {
+        if (!createFoldersAndFiles.createSpaceFile()) {
             spaceManagement.getSpaces().addAll(baseSpaces());
+        } else {
+            updateDocument(baseSpaces());
         }
+        if (!createFoldersAndFiles.createSpaceManagementFile()) {
+            if (getAllSpacesFromDocument() != null) {
+                spaceManagement.getSpaces().addAll(getAllSpacesFromDocument());
+            }
+        }
+
     }
 
     public String insertNewSpace(SpaceCategory category, String name) {
@@ -30,6 +36,18 @@ public class SpaceManagementResource {
             }
         }
         return "Falha ao adicionar espaço";
+    }
+
+    public void updateDocument(List<Space> list) {
+        spaceResource.updateDocument(list);
+    }
+
+    private List<Space> getAllSpacesFromDocument() {
+        return spaceResource.getAllSpacesFromDocument();
+    }
+
+    public List<Space> getAllSpaces() {
+        return spaceManagement.getSpaces();
     }
 
     private List<Space> baseSpaces() {
@@ -48,13 +66,5 @@ public class SpaceManagementResource {
         list.add(new Space(SpaceCategory.RECREACAO, "área para churrasco"));
         list.add(new Space(SpaceCategory.RECREACAO, "parque infantil"));
         return list;
-    }
-
-    private List<Space> getAllSpacesFromDocument() {
-        return spaceResource.getAllSpacesFromDocument();
-    }
-
-    public List<Space> getAllSpaces() {
-        return spaceManagement.getSpaces();
     }
 }
