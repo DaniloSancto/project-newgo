@@ -28,16 +28,19 @@ public class SpaceManagementResource {
                 listOfSpaces.addAll(getAllSpacesFromDocument());
             }
         }
-
     }
 
     public String registerUse(int space, String memberCardNumber, Date date,Date timeEnter, Integer timeInUse) {
-        if (listOfSpaces.get(space - 1) != null && date != null && timeEnter != null && timeInUse != null) {
-            SpaceManagement spaceManagement = new SpaceManagement(listOfSpaces.get(space - 1), memberCardNumber, date, timeEnter, timeInUse);
-            spaceManagementDao.insert(spaceManagement);
-            return "Uso registrado com sucesso!";
+        if(listOfSpaces.size() + 1 > space) {
+            if (listOfSpaces.get(space - 1) != null && date != null && timeEnter != null && timeInUse != null) {
+                SpaceManagement spaceManagement = new SpaceManagement(listOfSpaces.get(space - 1), memberCardNumber, date, timeEnter, timeInUse);
+                spaceManagementDao.insert(spaceManagement);
+                return "Uso registrado com sucesso!";
+            } else {
+                return "*ERRO: falha ao registrar uso*";
+            }
         } else {
-            return "*ERRO: falha ao registrar uso*";
+            return "*ERRO: Espaço não encontrado*";
         }
     }
 
