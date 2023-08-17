@@ -38,10 +38,15 @@ public class SpaceManagementPage {
         scanner.nextLine();
         System.out.print("Digite o nome do novo espaço: ");
         String name = scanner.nextLine();
-        System.out.print("Digite a capacidade do novo espaço: ");
-        Integer maxCapacity = scanner.nextInt();
-        ClearScreen.clear();
-        System.out.println(spaceManagementResource.insertNewSpace(spaceCategory, name, maxCapacity));
+        if (name.matches("[\\p{L}\\s]+") && !name.isEmpty()) {
+            System.out.print("Digite a capacidade do novo espaço: ");
+            Integer maxCapacity = scanner.nextInt();
+            ClearScreen.clear();
+            System.out.println(spaceManagementResource.insertNewSpace(spaceCategory, name, maxCapacity));
+        }else {
+            ClearScreen.clear();
+            System.out.println(Strings.ERROR_INVALID_NAME);
+        }
     }
 
     private void spaceUse(Scanner scanner) {
@@ -84,9 +89,9 @@ public class SpaceManagementPage {
     }
 
     private SpaceCategory getSpaceCategory(Scanner scanner) {
-        System.out.println("Escolha algum espaço:");
-        System.out.println("1- Esportes\n2- Recreação\n3- Relaxamento");
         while (true) {
+            System.out.println("Escolha algum espaço:");
+            System.out.println("1- Esportes\n2- Recreação\n3- Relaxamento");
             switch (scanner.nextInt()) {
                 case 1 -> {
                     return SpaceCategory.ESPORTES;

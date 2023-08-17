@@ -30,6 +30,7 @@ public class SpaceManagementResource {
         }
     }
 
+    // recebe valores e instancia um novo uso do espaço, ou retorna um erro
     public String registerUse(int space, String memberCardNumber, Date date,Date timeEnter, Integer timeInUse) {
         if(listOfSpaces.size() + 1 > space) {
             if (listOfSpaces.get(space - 1) != null && date != null && timeEnter != null && timeInUse != null) {
@@ -44,6 +45,7 @@ public class SpaceManagementResource {
         }
     }
 
+    // insere um novo espaço ou retorna um erro
     public String insertNewSpace(SpaceCategory category, String name, Integer maxCapacity) {
         if (category != null && name != null) {
             Space space = new Space(category, name, maxCapacity);
@@ -55,6 +57,7 @@ public class SpaceManagementResource {
         return "ERRO: *Falha ao adicionar espaço*";
     }
 
+    // transforma uma String em uma Data DD/MM/YYYY
     public Date stringToDate(String date) {
         try {
             return DateFormat.date.parse(date);
@@ -63,6 +66,7 @@ public class SpaceManagementResource {
         }
     }
 
+    // transforma uma String em uma Hora HH:MM
     public Date stringToTime(String time) {
         try {
             return DateFormat.time.parse(time);
@@ -71,18 +75,22 @@ public class SpaceManagementResource {
         }
     }
 
+    // atualiza o documento de acordo com a lista
     public void updateDocument(List<Space> list) {
         spaceResource.updateDocument(list);
     }
 
+    // pega todos os espaços do documento
     private List<Space> getAllSpacesFromDocument() {
         return spaceResource.getAllSpacesFromDocument();
     }
 
+    // pega todos os espaços da lista
     public List<Space> getAllSpaces() {
         return listOfSpaces;
     }
 
+    // lista base de espaços padrão
     private List<Space> baseSpaces() {
         List<Space> list = new ArrayList<>();
         list.add(new Space(SpaceCategory.ESPORTES, "quadra de futebol indoor", 25));
