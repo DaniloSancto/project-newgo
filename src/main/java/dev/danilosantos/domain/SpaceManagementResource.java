@@ -96,10 +96,10 @@ public class SpaceManagementResource {
         list.add(new Space(SpaceCategory.ESPORTES, "quadra de futebol indoor", 25));
         list.add(new Space(SpaceCategory.ESPORTES, "quadra de vôlei de praia", 25));
         list.add(new Space(SpaceCategory.ESPORTES, "quadra de beach tennis", 25));
-        list.add(new Space(SpaceCategory.ESPORTES, "campos de golfe 1", 25));
-        list.add(new Space(SpaceCategory.ESPORTES, "campos de golfe 2", 25));
-        list.add(new Space(SpaceCategory.ESPORTES, "piscina olímpica 1", 25));
-        list.add(new Space(SpaceCategory.ESPORTES, "piscina olímpica 2", 25));
+        list.add(new Space(SpaceCategory.ESPORTES, "campos de golfe um", 25));
+        list.add(new Space(SpaceCategory.ESPORTES, "campos de golfe dois", 25));
+        list.add(new Space(SpaceCategory.ESPORTES, "piscina olímpica um", 25));
+        list.add(new Space(SpaceCategory.ESPORTES, "piscina olímpica dois", 25));
         list.add(new Space(SpaceCategory.RECREACAO, "lago com pedalinhos", 25));
         list.add(new Space(SpaceCategory.RECREACAO, "jardim botânico", 25));
         list.add(new Space(SpaceCategory.ESPORTES, "academia", 25));
