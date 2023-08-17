@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 
 public class HomePage {
-
     MemberPage memberPage = new MemberPage();
+    SpaceManagementPage spaceManagementPage = new SpaceManagementPage();
 
     public HomePage() {
     }
@@ -22,7 +22,7 @@ public class HomePage {
             switch (scanner.nextInt()) {
                 case 1:
                     ClearScreen.clear();
-                    memberPage.registerOfMembers(scanner);
+                    memberPage.start(scanner);
                     break;
 
                 case 2:
@@ -37,7 +37,7 @@ public class HomePage {
 
                 case 4:
                     ClearScreen.clear();
-                    System.out.println("*EM DESENVOLVIMENTO*");
+                    spaceManagementPage.start(scanner);
                     break;
 
                 case 5:

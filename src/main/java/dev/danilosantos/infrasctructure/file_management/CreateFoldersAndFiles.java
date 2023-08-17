@@ -27,9 +27,14 @@ public class CreateFoldersAndFiles {
     public boolean createSpaceManagementFile() {
         File spaceFile = new File(Routes.SPACE_FILE_PATH);
         File spaceManagementFile = new File(Routes.SPACE_MANAGEMENT_FILE_PATH);
-        if (!spaceFile.exists() && !spaceManagementFile.exists()) {
+        if (!spaceFile.exists()) {
             try {
                 spaceFile.createNewFile();
+            } catch (IOException e) {
+                System.out.println("Error creating file: " + e.getMessage());
+            }
+        } else if (!spaceManagementFile.exists()) {
+            try {
                 spaceManagementFile.createNewFile();
             } catch (IOException e) {
                 System.out.println("Error creating file: " + e.getMessage());

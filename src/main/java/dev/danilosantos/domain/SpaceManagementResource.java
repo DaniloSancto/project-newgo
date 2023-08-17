@@ -6,7 +6,8 @@ import dev.danilosantos.infrasctructure.enums.SpaceCategory;
 import dev.danilosantos.infrasctructure.file_management.CreateFoldersAndFiles;
 
 public class SpaceManagementResource {
-    SpaceManagement spaceManagement;
+    SpaceManagement spaceManagement = new SpaceManagement();
+    SpaceResource spaceResource = new SpaceResource();
     CreateFoldersAndFiles createFoldersAndFiles = new CreateFoldersAndFiles();
 
     public SpaceManagementResource() {
@@ -15,8 +16,11 @@ public class SpaceManagementResource {
 
     public String insertNewSpace(SpaceCategory category, String name) {
         if (category != null && name != null) {
-            spaceManagement.getSpaces().add(new Space(category, name));
-            return "Espaço adicionado com sucesso!";
+            Space space = new Space(category, name);
+            spaceManagement.getSpaces().add(space);
+            if (spaceResource.insert(space)) {
+                return "Espaço: " + space.getName() + " adicionado com sucesso!";
+            }
         }
         return "Falha ao adicionar espaço";
     }

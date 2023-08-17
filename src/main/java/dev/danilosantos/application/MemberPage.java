@@ -13,7 +13,7 @@ public class MemberPage {
     String name, cardNumber;
     Document document;
 
-    public void registerOfMembers(Scanner scanner) {
+    public void start(Scanner scanner) {
         boolean running = true;
         while (running) {
             System.out.println(Strings.MENU_MEMBER_PAGE);
