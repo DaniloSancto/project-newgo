@@ -6,13 +6,15 @@ public class Space {
 
     private SpaceCategory category;
     private String name;
+    private Integer maxCapacity;
 
     public Space() {
     }
 
-    public Space(SpaceCategory category, String name) {
+    public Space(SpaceCategory category, String name, Integer maxCapacity) {
         this.category = category;
         this.name = name;
+        this.maxCapacity = maxCapacity;
     }
 
     public SpaceCategory getCategory() {
@@ -29,6 +31,14 @@ public class Space {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getMaxCapacity() {
+        return maxCapacity;
+    }
+
+    public void setMaxCapacity(Integer maxCapacity) {
+        this.maxCapacity = maxCapacity;
     }
 
     @Override

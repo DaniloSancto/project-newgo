@@ -36,13 +36,15 @@ public class SpaceManagementPage {
         scanner.nextLine();
         System.out.print("Digite o nome do novo espaço: ");
         String name = scanner.nextLine();
+        System.out.print("Digite a capacidade do novo espaço: ");
+        Integer maxCapacity = scanner.nextInt();
         ClearScreen.clear();
-        System.out.println(spaceManagementResource.insertNewSpace(spaceCategory, name));
+        System.out.println(spaceManagementResource.insertNewSpace(spaceCategory, name, maxCapacity));
     }
 
     private void spaceReservation(Scanner scanner) {
-        System.out.println("\nEscolha algum espaço:");
         getAllSpaces();
+        System.out.println("\nEscolha algum espaço:");
 
     }
 

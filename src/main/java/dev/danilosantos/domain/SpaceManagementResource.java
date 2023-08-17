@@ -9,28 +9,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SpaceManagementResource {
+    List<Space> listOfSpaces = new ArrayList<>();
     SpaceManagement spaceManagement = new SpaceManagement();
     SpaceResource spaceResource = new SpaceResource();
     CreateFoldersAndFiles createFoldersAndFiles = new CreateFoldersAndFiles();
 
     public SpaceManagementResource() {
-        if (!createFoldersAndFiles.createSpaceFile()) {
-            spaceManagement.getSpaces().addAll(baseSpaces());
-        } else {
+        if (createFoldersAndFiles.createSpaceFile()) {
             updateDocument(baseSpaces());
         }
         if (!createFoldersAndFiles.createSpaceManagementFile()) {
             if (getAllSpacesFromDocument() != null) {
-                spaceManagement.getSpaces().addAll(getAllSpacesFromDocument());
+                listOfSpaces.addAll(getAllSpacesFromDocument());
             }
         }
 
     }
 
-    public String insertNewSpace(SpaceCategory category, String name) {
+    public String insertNewSpace(SpaceCategory category, String name, Integer maxCapacity) {
         if (category != null && name != null) {
-            Space space = new Space(category, name);
-            spaceManagement.getSpaces().add(space);
+            Space space = new Space(category, name, maxCapacity);
+            listOfSpaces.add(space);
             if (spaceResource.insert(space)) {
                 return "Espaço: " + space.getName() + " adicionado com sucesso!";
             }
@@ -47,24 +46,24 @@ public class SpaceManagementResource {
     }
 
     public List<Space> getAllSpaces() {
-        return spaceManagement.getSpaces();
+        return listOfSpaces;
     }
 
     private List<Space> baseSpaces() {
         List<Space> list = new ArrayList<>();
-        list.add(new Space(SpaceCategory.ESPORTES, "quadra de futebol indoor"));
-        list.add(new Space(SpaceCategory.ESPORTES, "quadra de vôlei de praia"));
-        list.add(new Space(SpaceCategory.ESPORTES, "quadra de beach tennis"));
-        list.add(new Space(SpaceCategory.ESPORTES, "campos de golfe 1"));
-        list.add(new Space(SpaceCategory.ESPORTES, "campos de golfe 2"));
-        list.add(new Space(SpaceCategory.ESPORTES, "piscina olímpica 1"));
-        list.add(new Space(SpaceCategory.ESPORTES, "piscina olímpica 2"));
-        list.add(new Space(SpaceCategory.RECREACAO, "lago com pedalinhos"));
-        list.add(new Space(SpaceCategory.RECREACAO, "jardim botânico"));
-        list.add(new Space(SpaceCategory.ESPORTES, "academia"));
-        list.add(new Space(SpaceCategory.RELAXAMENTO, "spá"));
-        list.add(new Space(SpaceCategory.RECREACAO, "área para churrasco"));
-        list.add(new Space(SpaceCategory.RECREACAO, "parque infantil"));
+        list.add(new Space(SpaceCategory.ESPORTES, "quadra de futebol indoor", 25));
+        list.add(new Space(SpaceCategory.ESPORTES, "quadra de vôlei de praia", 25));
+        list.add(new Space(SpaceCategory.ESPORTES, "quadra de beach tennis", 25));
+        list.add(new Space(SpaceCategory.ESPORTES, "campos de golfe 1", 25));
+        list.add(new Space(SpaceCategory.ESPORTES, "campos de golfe 2", 25));
+        list.add(new Space(SpaceCategory.ESPORTES, "piscina olímpica 1", 25));
+        list.add(new Space(SpaceCategory.ESPORTES, "piscina olímpica 2", 25));
+        list.add(new Space(SpaceCategory.RECREACAO, "lago com pedalinhos", 25));
+        list.add(new Space(SpaceCategory.RECREACAO, "jardim botânico", 25));
+        list.add(new Space(SpaceCategory.ESPORTES, "academia", 25));
+        list.add(new Space(SpaceCategory.RELAXAMENTO, "spá", 25));
+        list.add(new Space(SpaceCategory.RECREACAO, "área para churrasco", 25));
+        list.add(new Space(SpaceCategory.RECREACAO, "parque infantil", 25));
         return list;
     }
 }

@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public class SpaceManagement {
-    private List<Space> spaces = new ArrayList<>();
+    private Space spaces;
     private Integer capacity;
     private Date date;
     private Date entry;
@@ -16,7 +16,7 @@ public class SpaceManagement {
     public SpaceManagement() {
     }
 
-    public SpaceManagement(List<Space> spaces, Integer capacity, Date date, Date entry, Date exit) {
+    public SpaceManagement(Space spaces, Integer capacity, Date date, Date entry, Date exit) {
         this.spaces = spaces;
         this.capacity = capacity;
         this.date = date;
@@ -24,11 +24,11 @@ public class SpaceManagement {
         this.exit = exit;
     }
 
-    public List<Space> getSpaces() {
+    public Space getSpaces() {
         return spaces;
     }
 
-    public void setSpaces(List<Space> spaces) {
+    public void setSpaces(Space spaces) {
         this.spaces = spaces;
     }
 
