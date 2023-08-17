@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 
 public class HomePage {
-    MemberPage memberPage = new MemberPage();
-    SpaceManagementPage spaceManagementPage = new SpaceManagementPage();
+    private final MemberPage memberPage = new MemberPage();
+    private final SpaceManagementPage spaceManagementPage = new SpaceManagementPage();
 
     public HomePage() {
     }

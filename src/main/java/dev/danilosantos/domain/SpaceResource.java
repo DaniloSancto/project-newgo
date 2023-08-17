@@ -6,7 +6,7 @@ import dev.danilosantos.infrasctructure.dao.SpaceDao;
 import java.util.List;
 
 public class SpaceResource {
-    SpaceDao spaceDao = new SpaceDao();
+    private final SpaceDao spaceDao = new SpaceDao();
 
     public boolean insert(Space space) {
         if (space != null) {

@@ -3,7 +3,6 @@ package dev.danilosantos.infrasctructure;
 import dev.danilosantos.infrasctructure.enums.SpaceCategory;
 
 public class Space {
-
     private SpaceCategory category;
     private String name;
     private Integer maxCapacity;

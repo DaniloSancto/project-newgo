@@ -12,9 +12,9 @@ import java.util.Date;
 import java.util.List;
 
 public class MemberResource {
-    MemberDao memberDao = new MemberDao();
-    GenerateMemberCardNumber generateCardNumber = new GenerateMemberCardNumber();
-    CreateFoldersAndFiles createFoldersAndFiles = new CreateFoldersAndFiles();
+    private final MemberDao memberDao = new MemberDao();
+    private final GenerateMemberCardNumber generateCardNumber = new GenerateMemberCardNumber();
+    final CreateFoldersAndFiles createFoldersAndFiles = new CreateFoldersAndFiles();
     private final List<Member> members = new ArrayList<>();
 
     public MemberResource() {

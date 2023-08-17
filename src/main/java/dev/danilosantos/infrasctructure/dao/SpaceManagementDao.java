@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class SpaceManagementDao {
-    Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     public void insert(SpaceManagement spaceManagement) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Routes.SPACE_MANAGEMENT_FILE_PATH, true))) {

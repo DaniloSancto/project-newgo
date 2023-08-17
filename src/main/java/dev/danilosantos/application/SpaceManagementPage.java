@@ -11,8 +11,8 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class SpaceManagementPage {
-    SpaceManagementResource spaceManagementResource = new SpaceManagementResource();
-    MemberResource memberResource = new MemberResource();
+    private final SpaceManagementResource spaceManagementResource = new SpaceManagementResource();
+    private final MemberResource memberResource = new MemberResource();
 
     public void start(Scanner scanner) {
         boolean running = true;
@@ -61,7 +61,6 @@ public class SpaceManagementPage {
                     Integer timeInUse = scanner.nextInt();
                     ClearScreen.clear();
                     System.out.println(spaceManagementResource.registerUse(spaceValue, memberCardNumber, date, timeEnter, timeInUse));
-                    ClearScreen.clear();
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }

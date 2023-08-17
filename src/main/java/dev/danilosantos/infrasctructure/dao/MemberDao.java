@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemberDao {
-    Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     public void insert(Member member) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Routes.MEMBER_FILE_PATH, true))) {

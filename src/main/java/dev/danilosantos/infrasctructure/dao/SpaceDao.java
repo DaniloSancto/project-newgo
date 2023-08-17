@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SpaceDao {
-    Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     public void insert(Space space) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Routes.SPACE_FILE_PATH, true))) {

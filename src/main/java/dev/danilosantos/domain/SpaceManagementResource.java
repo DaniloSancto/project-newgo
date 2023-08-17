@@ -16,7 +16,7 @@ public class SpaceManagementResource {
     private final SpaceManagementDao spaceManagementDao = new SpaceManagementDao();
     private final List<Space> listOfSpaces = new ArrayList<>();
     private final SpaceResource spaceResource = new SpaceResource();
-    CreateFoldersAndFiles createFoldersAndFiles = new CreateFoldersAndFiles();
+    final CreateFoldersAndFiles createFoldersAndFiles = new CreateFoldersAndFiles();
 
 
     public SpaceManagementResource() {

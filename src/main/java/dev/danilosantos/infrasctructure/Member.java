@@ -5,7 +5,6 @@ import dev.danilosantos.infrasctructure.util.DateFormat;
 import java.util.Date;
 
 public class Member {
-
     private String cardNumber;
     private String name;
     private String date;

@@ -9,9 +9,9 @@ import dev.danilosantos.infrasctructure.enums.DocumentType;
 import java.util.Scanner;
 
 public class MemberPage {
-    MemberResource memberResource = new MemberResource();
-    String name, cardNumber;
-    Document document;
+    private final MemberResource memberResource = new MemberResource();
+    private String name, cardNumber;
+    private Document document;
 
     public void start(Scanner scanner) {
         boolean running = true;

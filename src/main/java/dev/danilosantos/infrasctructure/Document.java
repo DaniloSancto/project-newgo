@@ -3,7 +3,6 @@ package dev.danilosantos.infrasctructure;
 import dev.danilosantos.infrasctructure.enums.DocumentType;
 
 public class Document {
-
     private DocumentType type;
     private String value;
 
