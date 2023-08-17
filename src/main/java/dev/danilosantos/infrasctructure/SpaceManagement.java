@@ -1,29 +1,36 @@
 package dev.danilosantos.infrasctructure;
 
 import dev.danilosantos.infrasctructure.enums.SpaceCategory;
+import dev.danilosantos.infrasctructure.util.DateFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class SpaceManagement {
-    String memberCardNumber;
-    private Space spaces;
-    private Integer capacity;
-    private Date date;
-    private Date entry;
-    private Date exit;
+    private Space space;
+    private String memberCardNumber;
+    private String date;
+    private String timeEnter;
+    private Integer timeInUse;
 
     public SpaceManagement() {
     }
 
-    public SpaceManagement(String memberCardNumber, Space spaces, Integer capacity, Date date, Date entry, Date exit) {
+    public SpaceManagement(Space space, String memberCardNumber, Date date, Date timeEnter, Integer timeInUse) {
+        this.space = space;
         this.memberCardNumber = memberCardNumber;
-        this.spaces = spaces;
-        this.capacity = capacity;
-        this.date = date;
-        this.entry = entry;
-        this.exit = exit;
+        this.date = DateFormat.date.format(date);
+        this.timeEnter = DateFormat.time.format(timeEnter);
+        this.timeInUse = timeInUse;
+    }
+
+    public Space getSpace() {
+        return space;
+    }
+
+    public void setSpace(Space space) {
+        this.space = space;
     }
 
     public String getMemberCardNumber() {
@@ -34,43 +41,27 @@ public class SpaceManagement {
         this.memberCardNumber = memberCardNumber;
     }
 
-    public Space getSpaces() {
-        return spaces;
-    }
-
-    public void setSpaces(Space spaces) {
-        this.spaces = spaces;
-    }
-
-    public Integer getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
-    }
-
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Date getEntry() {
-        return entry;
+    public String getTimeEnter() {
+        return timeEnter;
     }
 
-    public void setEntry(Date entry) {
-        this.entry = entry;
+    public void setTimeEnter(String timeEnter) {
+        this.timeEnter = timeEnter;
     }
 
-    public Date getExit() {
-        return exit;
+    public Integer getTimeInUse() {
+        return timeInUse;
     }
 
-    public void setExit(Date exit) {
-        this.exit = exit;
+    public void setTimeInUse(Integer timeInUse) {
+        this.timeInUse = timeInUse;
     }
 }

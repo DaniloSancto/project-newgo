@@ -2,17 +2,22 @@ package dev.danilosantos.domain;
 
 import dev.danilosantos.infrasctructure.Space;
 import dev.danilosantos.infrasctructure.SpaceManagement;
+import dev.danilosantos.infrasctructure.dao.SpaceManagementDao;
 import dev.danilosantos.infrasctructure.enums.SpaceCategory;
 import dev.danilosantos.infrasctructure.file_management.CreateFoldersAndFiles;
+import dev.danilosantos.infrasctructure.util.DateFormat;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SpaceManagementResource {
-    List<Space> listOfSpaces = new ArrayList<>();
-    SpaceManagement spaceManagement = new SpaceManagement();
-    SpaceResource spaceResource = new SpaceResource();
+    private final SpaceManagementDao spaceManagementDao = new SpaceManagementDao();
+    private final List<Space> listOfSpaces = new ArrayList<>();
+    private final SpaceResource spaceResource = new SpaceResource();
     CreateFoldersAndFiles createFoldersAndFiles = new CreateFoldersAndFiles();
+
 
     public SpaceManagementResource() {
         if (createFoldersAndFiles.createSpaceFile()) {
@@ -26,6 +31,16 @@ public class SpaceManagementResource {
 
     }
 
+    public String registerUse(int space, String memberCardNumber, Date date,Date timeEnter, Integer timeInUse) {
+        if (listOfSpaces.get(space - 1) != null && date != null && timeEnter != null && timeInUse != null) {
+            SpaceManagement spaceManagement = new SpaceManagement(listOfSpaces.get(space - 1), memberCardNumber, date, timeEnter, timeInUse);
+            spaceManagementDao.insert(spaceManagement);
+            return "Uso registrado com sucesso!";
+        } else {
+            return "*ERRO: falha ao registrar uso*";
+        }
+    }
+
     public String insertNewSpace(SpaceCategory category, String name, Integer maxCapacity) {
         if (category != null && name != null) {
             Space space = new Space(category, name, maxCapacity);
@@ -34,7 +49,23 @@ public class SpaceManagementResource {
                 return "Espaço: " + space.getName() + " adicionado com sucesso!";
             }
         }
-        return "Falha ao adicionar espaço";
+        return "ERRO: *Falha ao adicionar espaço*";
+    }
+
+    public Date stringToDate(String date) {
+        try {
+            return DateFormat.date.parse(date);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    public Date stringToTime(String time) {
+        try {
+            return DateFormat.time.parse(time);
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
     public void updateDocument(List<Space> list) {
