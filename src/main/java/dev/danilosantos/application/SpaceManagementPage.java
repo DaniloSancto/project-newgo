@@ -44,7 +44,7 @@ public class SpaceManagementPage {
 
     private void spaceReservation(Scanner scanner) {
         getAllSpaces();
-        System.out.println("\nEscolha algum espaço:");
+        System.out.println("\nEscolha algum dos espaço:");
 
     }
 

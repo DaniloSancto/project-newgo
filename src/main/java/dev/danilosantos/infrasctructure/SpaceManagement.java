@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public class SpaceManagement {
+    String memberCardNumber;
     private Space spaces;
     private Integer capacity;
     private Date date;
@@ -16,12 +17,21 @@ public class SpaceManagement {
     public SpaceManagement() {
     }
 
-    public SpaceManagement(Space spaces, Integer capacity, Date date, Date entry, Date exit) {
+    public SpaceManagement(String memberCardNumber, Space spaces, Integer capacity, Date date, Date entry, Date exit) {
+        this.memberCardNumber = memberCardNumber;
         this.spaces = spaces;
         this.capacity = capacity;
         this.date = date;
         this.entry = entry;
         this.exit = exit;
+    }
+
+    public String getMemberCardNumber() {
+        return memberCardNumber;
+    }
+
+    public void setMemberCardNumber(String memberCardNumber) {
+        this.memberCardNumber = memberCardNumber;
     }
 
     public Space getSpaces() {
