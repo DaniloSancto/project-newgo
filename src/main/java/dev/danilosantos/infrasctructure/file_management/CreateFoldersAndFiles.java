@@ -16,7 +16,7 @@ public class CreateFoldersAndFiles {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Error creating file: " + e.getMessage());
             }
         } else {
             return false;
@@ -25,12 +25,14 @@ public class CreateFoldersAndFiles {
     }
 
     public boolean createSpaceManagementFile() {
-        File file = new File(Routes.SPACE_MANAGEMENT_FILE_PATH);
-        if (!file.exists()) {
+        File spaceFile = new File(Routes.SPACE_FILE_PATH);
+        File spaceManagementFile = new File(Routes.SPACE_MANAGEMENT_FILE_PATH);
+        if (!spaceFile.exists() && !spaceManagementFile.exists()) {
             try {
-                file.createNewFile();
+                spaceFile.createNewFile();
+                spaceManagementFile.createNewFile();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Error creating file: " + e.getMessage());
             }
         } else {
             return false;
